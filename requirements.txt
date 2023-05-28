@@ -4,3 +4,6 @@ langchain
 pydantic==1.10.8
 python-multipart
 pinecone-client
+openai
+pypdf
+tiktoken

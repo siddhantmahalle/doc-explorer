@@ -9,13 +9,18 @@ const AnalyseUI = () => {
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowButton(true);
-    }, 3000);
+    const fetchProcessingStatus = async () => {
+      // Call the check_processing_status API
+      const response = await fetch('/api/process-status');
+      const data = await response.json();
 
-    return () => {
-      clearTimeout(timer); // Clean up the timer on component unmount
+      if (data.status === 'complete') {
+        setShowButton(true);
+      }
     };
+
+    fetchProcessingStatus();
+
   }, []);
 
   const handleDoneClick = () => {

@@ -14,7 +14,7 @@ class DocumentLoader:
         self.file_type = None
         self.file_content = None
 
-    def load(self, file: File(...), file_type: str):
+    def load(self, file: str, file_type: str):
 
         self.file = file
         self.file_type = file_type
