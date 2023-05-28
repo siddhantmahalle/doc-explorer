@@ -3,3 +3,4 @@ uvicorn[standard]
 langchain
 pydantic==1.10.8
 python-multipart
+pinecone-client
