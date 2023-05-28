@@ -1,6 +1,11 @@
+import asyncio
 from fastapi import FastAPI, UploadFile, File
 from api.models.chat_request import ChatRequest
+from api.process_document import ProcessDocument
+
 app = FastAPI()
+
+processor = ProcessDocument()
 
 
 @app.get("/api/python")
@@ -19,11 +24,7 @@ async def upload(file: UploadFile = File(...)) -> dict:
     Returns:
         JSON: JSON object with the results of the analysis
     """
-
-    contents = await file.read()
-
-    print("Received file:", file.filename)
-
+    asyncio.create_task(processor.process(document=file))
     return {"message": f"File {file.filename} uploaded successfully"}
 
 
@@ -41,4 +42,3 @@ async def chatbot(chat_request: ChatRequest) -> dict:
     response = f"This is the default response for {chat_request.message}"
 
     return {"response": response}
-
