@@ -10,7 +10,7 @@ const AnalyseUI = () => {
 
   useEffect(() => {
     const fetchProcessingStatus = async () => {
-      // Call the check_processing_status API
+      // Call the check_processing_status API\
       const response = await fetch('/api/process_status');
       const data = await response.json();
 
