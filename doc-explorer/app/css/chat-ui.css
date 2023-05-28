@@ -1,6 +1,30 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import '../css/globals.css';
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes message-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(405deg);
+  }
+}
 
 .center {
   display: flex;
@@ -11,19 +35,10 @@
   background-color: #fff;
 }
 
-.title-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #fff;
-  z-index: 2;
-}
-
 .title {
-  font-size: 24px;
-  color: #000;
-  margin: 20px;
+    font-size: 36px;
+    padding: 10px;;
+    color: #000;
 }
 
 .chat-container {
@@ -44,19 +59,19 @@
 }
 
 .chat-message {
-  background-color: #f2f2f2;
+  background-color: #34cff1;
   padding: 10px;
   margin-bottom: 10px;
   color: #333;
-  text-align: left;
-  /*border: 1px solid #ccc;*/
-  /*border-radius: 5px;*/
+  text-align: right;
+  border: none;
+  border-radius: 5px;
   animation: message-fade-in 0.3s ease-in-out;
 }
 
 .user-message {
-  text-align: right;
-  background-color: #eaf2ff;
+  text-align: left;
+  background-color: #7ce5b5;
   color: #333;
 }
 
@@ -64,13 +79,16 @@
   display: flex;
   align-items: center;
   margin-top: 10px;
-
+  animation: fade-in 0.5s ease-in-out;
 }
 
 .chat-input input {
   flex-grow: 1;
   padding: 5px;
   color: #333;
+  margin-right: 10px; /* Add margin to create space */
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .send-icon {
@@ -80,6 +98,7 @@
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  animation: fade-in 0.5s ease-in-out;
 }
 
 .send-icon:hover {
@@ -90,33 +109,13 @@
   display: inline-block;
   width: 20px;
   height: 20px;
-  border-top: 2px solid #fff;
-  border-right: 2px solid #fff;
-  border-left: 2px solid #fff;
-  border-bottom: 2px solid #fff;
+  border: 2px solid #fff;
+  border-radius: 50%;
   transform: rotate(45deg);
+  animation: rotate 0.5s linear infinite;
 }
 
 .input-box {
-  border: None;
-}
-
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes message-fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+  border: none;
+  animation: fade-in 0.5s ease-in-out;
 }

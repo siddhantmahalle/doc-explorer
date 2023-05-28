@@ -1,10 +1,10 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '@/app/css/chat-ui.css';
 
 const ChatUI = () => {
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<string[]>(['Hi, ask me questions about your document!']); // Default first message
   const [currentMessage, setCurrentMessage] = useState('');
 
   const handleSendMessage = async () => {
@@ -33,19 +33,25 @@ const ChatUI = () => {
     setCurrentMessage(e.target.value);
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSendMessage();
+    }
+  };
+
   useEffect(() => {
-  const chatMessages = document.getElementById('chat-messages');
-  if (chatMessages) {
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
+    const chatMessages = document.getElementById('chat-messages');
+    if (chatMessages) {
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
   }, [messages]);
 
 
   return (
     <div className="center">
-      <div className="title-container">
+      <div>
         <h1 className="title">Ask your Documents</h1>
-      </div>
+
       <div className="chat-container">
         <div className="chat-messages" id="chat-messages">
           {messages.map((message, index) => (
@@ -63,6 +69,7 @@ const ChatUI = () => {
             placeholder="Type your question"
             value={currentMessage}
             onChange={handleChangeMessage}
+            onKeyPress={handleKeyPress} // Add onKeyPress event handler
             className="input-box"
           />
           <button className="send-icon" onClick={handleSendMessage}>
@@ -70,6 +77,7 @@ const ChatUI = () => {
           </button>
         </div>
       </div>
+        </div>
     </div>
   );
 };
