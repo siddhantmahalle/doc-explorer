@@ -4,12 +4,21 @@ from api.models.chat_request import ChatRequest
 from api.process_document import ProcessDocument
 from api.query_document import QueryDoc
 
+from starlette.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
 
 processor = ProcessDocument()
 doc_query = QueryDoc()
-
-processing_status = "processing"
 
 # Placeholder dictionary to store task references
 task_dict = {}
@@ -38,21 +47,20 @@ async def upload(file: UploadFile = File(...)) -> dict:
         contents = await file.read()
         buffer.write(contents)
 
-
-    global processing_status
-    processing_status = "processing"
     task = asyncio.create_task(processor.process(document=file_path, file_type=file_type))
+    global task_dict
     task_dict["processing_task"] = task
     return {"message": f"processing {file.filename}"}
 
 
-@app.get("/api/process-status")
+@app.get("http://127.0.0.1:8000/api/process_status")
 async def process_status():
     # Check the processing status
-    global processing_status
+    global task_dict
     if "processing_task" in task_dict:
         task = task_dict["processing_task"]
         await task
+        task_dict.pop("processing_task")
 
     return {"status": "complete"}
 
@@ -70,7 +78,7 @@ async def chatbot(chat_request: ChatRequest) -> dict:
     """
     # response = f"This is the default response for {chat_request.message}"
     search_index = processor.get_search_index()
-    search_docs = search_index.similarity_search(query=chat_request.message, include_meta=True)
+    search_docs = search_index.similarity_search(query=chat_request.message)
     response = doc_query.query(query=chat_request.message, search_docs=search_docs)
 
     return {"response": response}

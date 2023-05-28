@@ -11,15 +11,15 @@ const AnalyseUI = () => {
   useEffect(() => {
     const fetchProcessingStatus = async () => {
       // Call the check_processing_status API
-      const response = await fetch('/api/process-status');
+      const response = await fetch('/api/process_status');
       const data = await response.json();
 
-      if (data.status === 'complete') {
+      if (data.status == 'complete') {
         setShowButton(true);
       }
     };
 
-    fetchProcessingStatus();
+    fetchProcessingStatus().then(r => console.log('Processing status fetched'));
 
   }, []);
 
