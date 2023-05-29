@@ -3,7 +3,7 @@ from fastapi import File
 from langchain.document_loaders import PyPDFLoader
 
 
-async def load_pdf(file: File(...)):
+def load_pdf(file: str):
 
     pdf_loader = PyPDFLoader(file)
     document = pdf_loader.load()
