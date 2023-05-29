@@ -19,7 +19,7 @@ const AnalyseUI = () => {
       }
     };
 
-    fetchProcessingStatus().then(r => console.log('Processing status fetched'));
+    fetchProcessingStatus();
 
   }, []);
 

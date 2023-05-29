@@ -16,6 +16,8 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+file_loc = "uploads/llms.pdf"
+file_type = "application/pdf"
 
 processor = ProcessDocument()
 doc_query = QueryDoc()
@@ -40,27 +42,23 @@ async def upload(file: UploadFile = File(...)) -> dict:
     Returns:
         JSON: JSON object with the results of the analysis
     """
-    file_type = file.content_type
     file_path = f"uploads/{file.filename}"
 
     with open(file_path, "wb") as buffer:
         contents = await file.read()
         buffer.write(contents)
 
-    task = asyncio.create_task(processor.process(document=file_path, file_type=file_type))
-    global task_dict
-    task_dict["processing_task"] = task
+    global file_loc, file_type
+    file_loc = file_path
+    file_type = file.content_type
+
     return {"message": f"processing {file.filename}"}
 
 
-@app.get("http://127.0.0.1:8000/api/process_status")
-async def process_status():
-    # Check the processing status
-    global task_dict
-    if "processing_task" in task_dict:
-        task = task_dict["processing_task"]
-        await task
-        task_dict.pop("processing_task")
+@app.get("/api/process_status")
+async def process_status() -> dict:
+    global file_loc, file_type
+    await asyncio.create_task(processor.process(document=file_loc, file_type=file_type))
 
     return {"status": "complete"}
 
