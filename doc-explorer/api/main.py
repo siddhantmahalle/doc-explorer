@@ -25,7 +25,7 @@ doc_query = QueryDoc()
 task_dict = {}
 
 
-@app.get("/api/python")
+@app.get("/api")
 async def root():
     return {"message": "Doc Explorer API"}
 
