@@ -3,7 +3,7 @@ from fastapi import File
 from langchain.document_loaders import UnstructuredPowerPointLoader
 
 
-async def load_pptx(file: File(...)):
+def load_pptx(file: File(...)):
 
     ppt_loader = UnstructuredPowerPointLoader(file)
     document = ppt_loader.load()

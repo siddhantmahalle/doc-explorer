@@ -7,10 +7,13 @@ const nextConfig = {
         destination:
           process.env.NODE_ENV === "development"
             ? "http://127.0.0.1:8000/api/:path*"
-            : "/api/",
+            : "http://127.0.0.1:8000/api/:path*",
       },
     ];
   },
+  experimental: {
+    proxyTimeout: 600_000,
+  }
 };
 
 module.exports = nextConfig;
