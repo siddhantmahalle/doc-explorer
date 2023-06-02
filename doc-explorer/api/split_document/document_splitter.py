@@ -1,9 +1,6 @@
 from api.split_document.pdf_splitter import split_pdf
-from api.split_document.text_splitter import split_text
-from api.split_document.docx_splitter import split_docx
-from api.split_document.pptx_splitter import split_pptx
 
-from api.exceptions import DocumentSplitException
+from api.exceptions.exceptions import DocumentSplitException
 
 
 class DocumentSplitter:
@@ -29,12 +26,12 @@ class DocumentSplitter:
 
         if self.file_type == 'application/pdf':
             document_chunks = split_pdf(self.document_content)
-        elif self.file_type == 'text/plain':
-            document_chunks = split_text(self.document_content)
-        elif self.file_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-            document_chunks = split_docx(self.document_content)
-        elif self.file_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
-            document_chunks = split_pptx(self.document_content)
+        # elif self.file_type == 'text/plain':
+        #     document_chunks = split_text(self.document_content)
+        # elif self.file_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+        #     document_chunks = split_docx(self.document_content)
+        # elif self.file_type == 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+        #     document_chunks = split_pptx(self.document_content)
         else:
             raise DocumentSplitException()
 
