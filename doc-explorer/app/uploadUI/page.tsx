@@ -3,11 +3,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import '@/app/css/upload-ui.css';
 
-interface UploadUIProps {
-  onUploadComplete: () => void;
-}
 
-const UploadUI = ({ onUploadComplete }: UploadUIProps) => {
+
+const UploadUI = () => {
   const [file, setFile] = useState<File | null>(null);
   const router = useRouter();
 

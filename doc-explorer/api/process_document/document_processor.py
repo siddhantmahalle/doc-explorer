@@ -18,7 +18,7 @@ class ProcessDocument:
         self.text_splitter = DocumentSplitter()
         self.document_embeddings = EmbedDocuments()
 
-    async def process(self, document: str, file_type: str):
+    def process(self, document: str, file_type: str):
 
         self.document = document
         self.file_type = file_type

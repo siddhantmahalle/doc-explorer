@@ -1,4 +1,3 @@
-import asyncio
 from fastapi import FastAPI, UploadFile, File
 from api.models.chat_request import ChatRequest
 from api.process_document import ProcessDocument
@@ -27,7 +26,7 @@ task_dict = {}
 
 
 @app.get("/api/python")
-def root():
+async def root():
     return {"message": "Doc Explorer API"}
 
 
@@ -55,10 +54,10 @@ async def upload(file: UploadFile = File(...)) -> dict:
     return {"message": f"processing {file.filename}"}
 
 
-@app.get("/api/process_status")
+@app.post("/api/process_status")
 async def process_status() -> dict:
     global file_loc, file_type
-    await asyncio.create_task(processor.process(document=file_loc, file_type=file_type))
+    processor.process(document=file_loc, file_type=file_type)
 
     return {"status": "complete"}
 
