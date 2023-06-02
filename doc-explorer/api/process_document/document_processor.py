@@ -1,9 +1,9 @@
 import os
 import logging
 from fastapi import File
-from api.load_document import DocumentLoader
-from api.split_document import DocumentSplitter
-from api.embed_documents import EmbedDocuments
+from api.load_document.document_loader import DocumentLoader
+from api.split_document.document_splitter import DocumentSplitter
+from api.embed_documents.embed_documents import EmbedDocuments
 
 logging.basicConfig(level=logging.INFO)
 
