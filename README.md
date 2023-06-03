@@ -4,6 +4,9 @@
 <div>
     <h3 align="center">Upload your documents and ask questions</h3>
 </div>
+<div align="center">
+   <img src="media/webpage.png" height="70%" width="70%">
+</div>
 
 ## Introduction
 
