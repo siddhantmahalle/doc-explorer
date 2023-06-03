@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  doc-explorer:
+    image: doc_explorer:v1
+    ports:
+      - "3000:3000"
+      - "8000:8000"
