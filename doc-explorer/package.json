@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "fastapi-dev": "mkdir -p uploads && pip3 install -r requirements.txt && python3 -m uvicorn api.main:app",
+    "fastapi-dev": "pip3 install -r requirements.txt && python3 -m uvicorn api.main:app",
     "next-dev": "next dev",
     "dev": "concurrently \"npm run next-dev\" \"npm run fastapi-dev\"",
     "build": "next build --debug",

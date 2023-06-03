@@ -1,7 +1,7 @@
 from fastapi import FastAPI, UploadFile, File
 from api.models.chat_request import ChatRequest
-from api.process_document.document_processor import ProcessDocument
-from api.query_document.query_chain import QueryDoc
+from api.process_document import ProcessDocument
+from api.query_document import QueryDoc
 
 from starlette.middleware.cors import CORSMiddleware
 
@@ -25,7 +25,7 @@ doc_query = QueryDoc()
 task_dict = {}
 
 
-@app.get("/api")
+@app.get("/api/python")
 async def root():
     return {"message": "Doc Explorer API"}
 
